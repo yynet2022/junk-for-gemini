@@ -1,0 +1,5 @@
+◆API Key
+Google AI Studio から取得
+
+◆ インストール
+pip install google-generativeai
