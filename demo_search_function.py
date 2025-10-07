@@ -6,12 +6,19 @@ import json
 
 def get_google_news_articles(query: str) -> str:
     """
-    Google Newsを検索し、記事のタイトル、URL、スニペットのリストをJSON形式で返す関数。
+    最新のニュースを Google 検索で検索し、記事のタイトル、URL、スニペットのリストをJSON形式で返す関数。
+
+    ex) get_google_news_articles(query='経済')
+
     これがAI Studioの「ツール」として呼び出される。
     """
+    print(f"--- ツール実行: get_google_news_articles(query='{query}') ---")
 
     # ユーザーが指摘した、ニュース検索用のURL
-    url = f"https://www.google.com/search?q={query}&tbm=nws&tbs=qdr:d"
+    # url = f"https://www.google.com/search?q={query}&tbm=nws&tbs=qdr:d"
+    url = f"https://www.google.com/search?q={query}" \
+        "+-site:youtube.com+-site:nicovideo.jp+-site:dailymotion.com" \
+        "&tbm=nws&tbs=qdr:d"
 
     # PCからのアクセスのふりをするためのヘッダー
     headers = {
@@ -25,7 +32,8 @@ def get_google_news_articles(query: str) -> str:
     response.raise_for_status()  # エラーがあればここで例外を発生させる
 
     # 2. HTMLの解析 (Beautiful Soupの出番)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, 'lxml')
 
     # 3. 主要な情報の抽出
     # Googleの検索結果のHTML構造は変更される可能性があるため、このセレクタは一例です。
