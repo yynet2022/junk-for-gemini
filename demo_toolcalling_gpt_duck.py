@@ -26,6 +26,13 @@ def web_search(query: str):
     except Exception as e:
         return json.dumps({"error": str(e)})
 
+## RAG だとこんな感じになる。
+## def search_internal_documents(query: str):
+##     # 1. query をベクトル化 (Embeddings API)
+##     # 2. 社内のVector DB (Pinecone, pgvector等) を検索
+##     # 3. 関連するドキュメントのテキストを抽出して返す
+##     return retrieved_text_chunks
+
 # --- ツール定義 ---
 tools = [
     {
