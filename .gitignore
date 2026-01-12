@@ -3,3 +3,4 @@
 *.json
 *~
 !titles.json
+list_202*.txt
